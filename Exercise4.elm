@@ -41,6 +41,9 @@ update msg model =
             -- so CollectIt AND KeyUp will both fire on every keyup
             -- the big idea is that unless key == 13, just return the already
             -- updated (from CollectIt) model
+            -- i'm thinking that using the advanced update : Msg -> Model -> (Model, Msg)
+            -- then KeyUp could send the CollectIt msg to the update function, but where
+            -- would it get the input value; or could key just be transformed into it?
             if key == 13 then
                 { model
                     | model = model.model + model.increment
