@@ -4,6 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Json.Decode as Json
+import Char
 
 
 type alias Model =
@@ -19,7 +20,7 @@ type Msg
     = AddIt
     | CollectIt String
     | ClearIt
-    | KeyUp Int
+    | KeyDown Char.KeyCode
 
 
 update : Msg -> Model -> Model
@@ -37,12 +38,12 @@ update msg model =
         ClearIt ->
             initialModel
 
-        KeyUp key ->
-            -- so CollectIt AND KeyUp will both fire on every keyup
+        KeyDown key ->
+            -- so CollectIt AND KeyDown will both fire on every KeyDown
             -- the big idea is that unless key == 13, just return the already
             -- updated (from CollectIt) model
             -- i'm thinking that using the advanced update : Msg -> Model -> (Model, Msg)
-            -- then KeyUp could send the CollectIt msg to the update function, but where
+            -- then KeyDown could send the CollectIt msg to the update function, but where
             -- would it get the input value; or could key just be transformed into it?
             if key == 13 then
                 { model
@@ -55,13 +56,13 @@ update msg model =
 
 
 -- Html.Attributes.keyCode
--- tagger is the msg passed as the argument to onKeyUp,
--- in this case it is KeyUp
+-- tagger is the msg passed as the argument to onKeyDown,
+-- in this case it is KeyDown
 
 
-onKeyUp : (Int -> msg) -> Attribute msg
-onKeyUp tagger =
-    on "keyup" (Json.map tagger keyCode)
+onKeyDown : (Int -> msg) -> Attribute msg
+onKeyDown tagger =
+    on "keydown" (Json.map tagger keyCode)
 
 
 
@@ -80,7 +81,7 @@ view model =
         [ h4 [] [ text ("It: " ++ (toString model.model)) ]
         , input
             [ type_ "Input"
-            , onKeyUp KeyUp
+            , onKeyDown KeyDown
             , onMyInput CollectIt
             , value
                 (if model.increment == 0 then
