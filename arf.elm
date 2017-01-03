@@ -17,6 +17,7 @@ initialModel =
 type Msg
     = AddIt
     | ClearIt
+    | Freg
 
 
 update : Msg -> Model -> Model
@@ -28,6 +29,10 @@ update msg model =
         ClearIt ->
             initialModel
 
+        Freg ->
+            Debug.log "stuff goes here"
+                model
+
 
 view : Model -> Html Msg
 view model =
@@ -36,6 +41,7 @@ view model =
         , br [] []
         , button [ type_ "Button", onClick AddIt ] [ text "AddIt" ]
         , button [ type_ "Button", onClick ClearIt ] [ text "ClearIt" ]
+        , button [ type_ "Button", onClick Freg ] [ text "Freg" ]
         ]
 
 

@@ -28,13 +28,14 @@ sum ns =
 
 initialModel : Model
 initialModel =
-    { il = Node 13 (Node 23 Empty)
+    { il = Node 17 (Node 23 (Node -10 Empty))
     , sum = 0
     }
 
 
 type Msg
     = Sum
+    | Arf
 
 
 update : Msg -> Model -> Model
@@ -43,6 +44,9 @@ update msg model =
         Sum ->
             { model | sum = sum model.il }
 
+        Arf ->
+            Debug.log "arf: " model
+
 
 view : Model -> Html Msg
 view model =
@@ -50,6 +54,7 @@ view model =
         [ text ("Sum: " ++ (toString model))
         , br [] []
         , button [ type_ "Button", onClick Sum ] [ text "AddIt" ]
+        , button [ type_ "Button", onClick Arf ] [ text "Arf" ]
         ]
 
 
