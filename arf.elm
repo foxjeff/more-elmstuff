@@ -45,6 +45,15 @@ view model =
         ]
 
 
+type alias Bg =
+    { url : String }
+bg = Bg "blerg"
+
+[bg] |> Array.fromList |> Array.get 0 |> Maybe.map .url
+-- Just "blerg" : Maybe.Maybe String
+
+
+
 main : Program Never Model Msg
 main =
     Html.beginnerProgram { model = initialModel, update = update, view = view }

@@ -60,4 +60,8 @@ view model =
 
 main : Program Never Model Msg
 main =
-    Html.beginnerProgram { model = initialModel, update = update, view = view }
+    Html.beginnerProgram
+        { model = initialModel
+        , update = update
+        , view = view
+        }
