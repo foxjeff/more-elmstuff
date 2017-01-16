@@ -37,7 +37,7 @@ update msg model =
             initialModel
 
         Freg ->
-            Debug.log "stuff goes here"
+            Debug.log "even stuff goes here"
                 model
 
 
