@@ -1,0 +1,10 @@
+    <section class="suite">
+      <h1>foo</h1>
+      <dl>
+        <dt>should always pass</dt>
+        <dd><pre><code>expect(1).to.equal(1);</code></pre></dd>
+        <dt class="error">should equal arf</dt>
+        <dd class="error"><pre><code>expect(foo.ftr).to.equal('rarf');</code></pre></dd>
+        <dd class="error">AssertionError: expected 'arf' to equal 'rarf'</dd>
+      </dl>
+    </section>
